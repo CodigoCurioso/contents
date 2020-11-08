@@ -9,9 +9,13 @@ content: https://github.com/CodigoCurioso/contents/blob/main/ejercicios/00001-es
 date: 2020-11-04
 ---
 
+# ¿Es Único?
+
+## Descripción
+
 Implemente un algoritmo para determinar si una cadena de texto tiene sólo caracteres únicos.
 
-## Resultados esperados
+### Resultados esperados
 
 ``` shell
  > IsUnique("abcd");
@@ -23,11 +27,11 @@ Implemente un algoritmo para determinar si una cadena de texto tiene sólo carac
    false
 ```
 
-# Solución
+## Solución
 
-## Análisis
+### Análisis
 
-### ¿Qué codificación se utilizará?
+#### ¿Qué codificación se utilizará?
 
 Cuando un ejercicio de programación hace uso de caracteres puede ser importante conocer el tipo de codificación que se utilizará. Si sabes el tipo de codificación a utilizar te dará la posibilidad de realizar algoritmos más eficientes.
 
@@ -35,7 +39,7 @@ No es lo mismo esperar recibir una cadena de texto ASCII a recibir una cadena de
 
 Si en el enunciado del problema no especifica la codificación, puedes preguntarle al entrevistador si sabe el tipo de codificación a utilzar. Si te dice la codificación ya tienes un dato importante para definir tu algoritmo, si no al menos mostraste al entrevistador que prestas atención a los detalles ;)
 
-### Retornar una respuesta rápidamente en cadenas de texto largas
+#### Retornar una respuesta rápidamente en cadenas de texto largas
 
 Si se te ha dado la codificación, éste puede ser utilizado para determinar si hay caracteres duplicados en cadenas de texto largas rápidamente.
 
@@ -51,7 +55,7 @@ if (text.length > 128) {
 }
 ```
 
-### Almacenamiento en memoria
+#### Almacenamiento en memoria
 
 En este ejercicio necesitarás almacenar temporalmente en memoria los caracteres revisados.
 
@@ -67,9 +71,9 @@ boolean[] lettersFound = new boolean[128];
 
 Independiente del almacenamiento utilizado, toma encuenta almacenar la menor información posible. Si necesitas definir un tipo de dato, procura utilizar boleanos o bit.
 
-## Respuestas
+### Respuestas
 
-### Respuesta 1
+#### Respuesta 1
 
 Si no sabes la codificación de texto puedes crear un código como el siguiente (Entre más largo el texto más iteraciones tendrá que realizar).
 
@@ -91,7 +95,7 @@ function IsUnique(text) {
 }
 ```
 
-### Respuesta 2
+#### Respuesta 2
 
 Si sabes que la codificación es ASCII puedes utilizar el siguiente código (En textos mayores a 128 caracteres devolverá el resultado inmediatamente).
 
@@ -119,7 +123,7 @@ function IsUnique(text) {
 }
 ```
 
-### Respuesta 3
+#### Respuesta 3
 
 Si no es permitido utilizar estructuras de datos adicionales, deberás de utilizar dos ciclos.
 
@@ -138,7 +142,7 @@ function IsUnique(text) {
 }
 ```
 
-### Respuesta 4
+#### Respuesta 4
 
 Si te es permitido modificar el string de entrada, podrías ordenarlo primero y verificar si hay dos letras a la par iguales.
 
