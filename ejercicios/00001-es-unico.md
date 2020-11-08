@@ -5,7 +5,7 @@ title: "¿Es Único?"
 description: "Determinar si una cadena de texto tiene caracteres duplicados"
 tags: caracteres cadena-de-texto duplicados arreglos
 difficulty: 1
-content: https://github.com/CodigoCurioso/CodigoCurioso.github.io
+content: https://github.com/CodigoCurioso/contents/blob/main/ejercicios/00001-es-unico.md
 date: 2020-11-04
 ---
 
