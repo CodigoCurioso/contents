@@ -146,7 +146,7 @@ function IsUnique(text) {
 
 #### Respuesta 4
 
-Esta respuesta muestra un caso espcial. Si te dicen que recibirás un texto ordenado o que tienes la posibilidad de ordenarlo, sólo tendrás que revisar si hay dos letras iguales a la par. El algoritmo sería así:
+Si te dicen que recibirás un texto ordenado o que tienes la posibilidad de ordenarlo, sólo tendrás que revisar si hay dos letras iguales a la par. El algoritmo sería así:
 
 ``` JavaScript
 function IsUnique(text) {
