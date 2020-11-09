@@ -31,19 +31,23 @@ Implemente un algoritmo para determinar si una cadena de texto tiene sólo carac
 
 ### Análisis
 
-#### ¿Qué codificación se utilizará?
+#### Codificación
 
-Cuando un ejercicio de programación hace uso de caracteres puede ser importante conocer el tipo de codificación que se utilizará. Si sabes el tipo de codificación a utilizar te dará la posibilidad de realizar algoritmos más eficientes.
+Cuando un ejercicio de programación hace uso de caracteres puede ser importante conocer el tipo de codificación que utilizará. Conociendo el tipo de codificación te dará la posibilidad de realizar mejores algoritmos.
 
-No es lo mismo esperar recibir una cadena de texto ASCII a recibir una cadena de texto Unicode. ASCII está compuesto de 128 carateres mientras que Unicode actualmente en la versión 13.0 tiene 143924 caracteres, una diferencia considerable. Por otro lado ASCII extendido cuenta con 256 caracteres.
+Por ejemplo, ASCII y Unicode son codificaciones que varian en la cantidad de caracteres soportados. ASCII está compuesto de 128 carateres mientras que Unicode en la versión 13.0 tiene 143 924 caracteres, una diferencia considerable.
 
-Si en el enunciado del problema no especifica la codificación, puedes preguntarle al entrevistador si sabe el tipo de codificación a utilzar. Si te dice la codificación ya tienes un dato importante para definir tu algoritmo, si no al menos mostraste al entrevistador que prestas atención a los detalles ;)
+> ASCII está compuesto de 128 caracteres, Unicode 143 924
 
-#### Retornar una respuesta rápidamente en cadenas de texto largas
+Si estás en una entrevista de trabajo y el enunciado no especifica la codificación, puedes preguntarle al entrevistador si sabe el tipo de codificación a utilzar. Si te dice la codificación ya tienes un dato importante para definir tu algoritmo, si no al menos mostraste al entrevistador que prestas atención a los detalles ;)
 
-Si se te ha dado la codificación, éste puede ser utilizado para determinar si hay caracteres duplicados en cadenas de texto largas rápidamente.
+#### Utilizando la codificación en el algoritmo
 
-Supongamos que se te ha dicho que la cadena de texto que recibirá el algoritmo es ASCII. Habíamos mencionado que ASCII se compone de 128 caracteres únicos, entonces es válido suponer que si una cadena de texto tiene una longitud de 129 al menos un caracter está duplicado. En ASCII no es posible tener cadenas de texto de longitud mayor a 128 sin que haya al menos un caracter duplicado.
+Si se te ha dado una codificación es importante que lo utilices de manera adecuada en tu algoritmo.
+
+Supongamos que se te ha dicho que la cadena de texto que recibirá el algoritmo es ASCII. Habíamos mencionado anteriormente que ASCII se compone de 128 caracteres únicos, entonces es válido suponer que si una cadena de texto tiene una longitud de 129 tendrá al menos un caracter duplicado.
+
+> En ASCII no es posible tener cadenas de texto de longitud mayor a 128 sin que haya al menos un caracter duplicado.
 
 Este es un punto importante a considerar ya que ayuda a crear un algoritmo altamente eficiente. Se puede definir una condición que valida la longitud de la cadena de texto. Si la cadena de texto es mayor a 128 caracteres se devuelve false inmediatamente. Si no, se recorre todo la cadena de texto en busca de duplicados, pero en el peor de los casos se recorrerá una cadena de texto de 128 caracteres.
 
@@ -57,47 +61,45 @@ if (text.length > 128) {
 
 #### Almacenamiento en memoria
 
-En este ejercicio necesitarás almacenar temporalmente en memoria los caracteres revisados.
+En este ejercicio necesitarás almacenar temporalmente en memoria los caracteres revisados, dependiendo del lenguaje tendrás diferentes opciones.
 
-Debes conocer bien el lenguaje utilizado para determinar la mejor estructura a utilizar. Es importante considerar que debes poder almacenar la letra revisada, pero además deberás de poder buscarlo rápidamente si la nacesitas.
+Considera utilizar una estructura de datos que no ocupe mucho espacio en memoria y puedas obtener sus valores rápidamente. Algunas opciones son las **tablas hash**,  **diccionarios** o **arreglos indexados**.
 
-Opciones para almacenar en estos casos están las **tablas hash** o **diccionarios**. También puedes considerar utilizar un **arreglo indexado**.
-
-Si optas por utilizar un arreglo y el lenguaje necesita que definas la longitud, puedes definirlo conociendo el tipo de codificación.
+Si optas por utilizar un arreglo y el lenguaje necesita que definas su longitud, recuerda que la coficación te ayudará a definirlo.
 
 ``` Java
-boolean[] lettersFound = new boolean[128];
+boolean[] lettersFound = new boolean[128]; // Codificación ASCII: 128 caracteres
 ```
 
-Independiente del almacenamiento utilizado, toma encuenta almacenar la menor información posible. Si necesitas definir un tipo de dato, procura utilizar boleanos o bit.
+Procura almacenar valores que no ocupen mucho espacio en memoria. Puedes utilizar **booleanos** o **bit**.
 
 ### Respuestas
 
 #### Respuesta 1
 
-Si no sabes la codificación de texto puedes crear un código como el siguiente (Entre más largo el texto más iteraciones tendrá que realizar).
+Si no sabes la codificación de texto, tendrás que hacer un recorrido de todas las letras del texto hasta encontrar una letra ya revisada anteriormente. Este código tiene el inconveniente que entre más largo el texto igualmente aumentarán las iteraciones que tendrá que realizar.
 
 ``` JavaScript
 function IsUnique(text) {
     let result = true;
     const lettersFound = [];
-    
+
     for(letter of text) {
         if (lettersFound[letter]) {
             result = false;
             break;
-        } 
-    
+        }
+
         lettersFound[letter] = true;
     }
-    
+
     return result;
 }
 ```
 
 #### Respuesta 2
 
-Si sabes que la codificación es ASCII puedes utilizar el siguiente código (En textos mayores a 128 caracteres devolverá el resultado inmediatamente).
+Si sabes la codificación, puedes utilizarla a tu favor. Esta respuesta muestra una solucion utilizando ASCII. Tiene la ventaja de que en textos mayores a 128 caracteres devolverá el resultado `false` sin realizar el ciclo.
 
 ``` JavaScript
 const ASCII_LENGTH = 128;
@@ -113,8 +115,8 @@ function IsUnique(text) {
             if (lettersFound[letter]) {
                 result = false;
                 break;
-            } 
-        
+            }
+
             lettersFound[letter] = true;
         }
     }
@@ -125,11 +127,11 @@ function IsUnique(text) {
 
 #### Respuesta 3
 
-Si no es permitido utilizar estructuras de datos adicionales, deberás de utilizar dos ciclos.
+Si el enunciado no te permite utilizar estructuras de datos adicionales, tendrás que crear dos ciclos en busca de la letra duplicada.
 
 ``` JavaScript
 function IsUnique(text) {
-    
+
     for(let i = 0; i < text.length; i++) {
       for(let j = i + 1; j < text.length; j++) {
         if (text[i] == text[j]) {
@@ -144,11 +146,11 @@ function IsUnique(text) {
 
 #### Respuesta 4
 
-Si te es permitido modificar el string de entrada, podrías ordenarlo primero y verificar si hay dos letras a la par iguales.
+Esta respuesta muestra un caso espcial. Si te dicen que recibirás un texto ordenado o que tienes la posibilidad de ordenarlo, sólo tendrás que revisar si hay dos letras iguales a la par. El algoritmo sería así:
 
 ``` JavaScript
 function IsUnique(text) {
-    
+
     const sortedText = SortString(text);
 
     for(let i = 0; i < sortedText.length - 1; i++) {
